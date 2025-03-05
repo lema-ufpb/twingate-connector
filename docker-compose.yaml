@@ -1,0 +1,17 @@
+services:
+  twingate_connector:
+    container_name: twingate-connector
+    restart: always
+    image: "twingate/connector:latest"
+    env_file:
+      - .env
+    environment:
+      - TWINGATE_LOG_ANALYTICS=v2
+      - TWINGATE_LOG_LEVEL=3
+    sysctls:
+      net.ipv4.ping_group_range: "0 2147483647"
+
+networks:
+  default:
+    external:
+      name: production
